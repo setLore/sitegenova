@@ -1,0 +1,70 @@
+<header class="site-header">
+    <img src="logo.png" alt="Logo" class="logo">
+    <nav class="nav-buttons">
+        <button>Home</button>
+        <button>Shop</button>
+        <button>About</button>
+    </nav>
+</header>
+<footer class="site-footer">
+    Copyright M&D
+</footer>
+<style>
+body {
+    margin: 0;
+    background: #181818;
+}
+.site-header {
+    width: 100%;
+    background: #222;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 0;
+    border-radius: 0 0 32px 32px; /* Curved bottom corners */
+    border-bottom: 2px solid #333;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: relative;
+    z-index: 101;
+}
+.logo {
+    height: 56px;
+    margin-right: 32px;
+    margin-left: 32px;
+}
+.nav-buttons {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    gap: 48px;
+}
+.nav-buttons button {
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 16px 32px;
+    font-size: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.nav-buttons button:hover {
+    background: #444;
+}
+.site-footer {
+    width: 100%;
+    background: #222;
+    color: #fff;
+    text-align: center;
+    padding: 24px 0;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    border-radius: 32px 32px 0 0; /* Curved top corners */
+    border-top: 2px solid #333;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+    font-size: 18px;
+    z-index: 100;
+}
+</style>
