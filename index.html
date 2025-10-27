@@ -29,9 +29,51 @@
 			</a>
 		</div>
 	</header>
+
+	<!-- Video background with hero overlayed -->
+	<div class="hero-video-wrap">
+		<video id="bg-video" autoplay muted loop playsinline aria-hidden="true" preload="auto" poster="">
+			<source src="sait-a.mp4" type="video/mp4">
+		</video>
+		<section class="hero-section" role="region" aria-label="Hero">
+			<div class="hero-content">
+				<h1 class="hero-title">Find the best part for your automobile</h1>
+				<p class="hero-sub">Fast, easy, and cheap</p>
+				<a class="hero-cta" href="shop.html">View Parts</a>
+			</div>
+		</section>
+	</div>
+
+	<!-- Add spacing below hero/video -->
+	<div style="height: 3.5rem;"></div>
+
 	<footer class="site-footer">
 		Copyright M&D
 	</footer>
+
+	<!-- Review Section BELOW hero, with bg image and left-aligned carousel -->
+	<section class="review-section">
+		<div class="review-bg"></div>
+		<div class="review-carousel-container">
+			<div class="review-carousel" aria-label="Customer Reviews">
+				<div class="review-rating">
+					<span class="star full">&#9733;</span>
+					<span class="star full">&#9733;</span>
+					<span class="star full">&#9733;</span>
+					<span class="star full">&#9733;</span>
+					<span class="star empty">&#9733;</span>
+					<span class="rating-text">4/5</span>
+				</div>
+				<div class="review-slider">
+					<button class="review-arrow left" aria-label="Previous review">&#8592;</button>
+					<div class="review-content">
+						<!-- Reviews will be injected here by JS -->
+					</div>
+					<button class="review-arrow right" aria-label="Next review">&#8594;</button>
+				</div>
+			</div>
+		</div>
+	</section>
 
 	<style>
 		/* Responsive/site-wide improvements replacing the old style block */
@@ -69,7 +111,6 @@
 
 		.logo {
 			/* scales between 40px and 56px */
-			height: clamp(40px, 6vw, 56px);
 			margin-right: clamp(12px, 3vw, 32px);
 			margin-left: clamp(12px, 3vw, 32px);
 			max-width: 40%;
@@ -78,11 +119,16 @@
 
 		.nav-buttons {
 			display: flex;
-			flex: 1;
+			/* center nav independently of logo and header actions */
+			position: absolute;
+			left: 50%;
+			transform: translateX(-50%);
+			flex: 0 1 auto;
 			justify-content: center;
 			gap: clamp(12px, 3vw, 48px);
 			flex-wrap: wrap; /* allow wrapping on narrow viewports */
 			padding: 0 8px;
+			z-index: 110;
 		}
 
 		.nav-buttons a.nav-link{
@@ -459,6 +505,261 @@
 			/* make room for the fixed top header so content isn't hidden */
 			body { padding-top: calc(var(--header-height) + 16px); padding-bottom: clamp(72px, 10vh, 120px); }
 		}
+
+		.hero-video-wrap {
+			position: relative;
+			width: 100vw;
+			max-width: 100%;
+			height: min(60vh, 480px);
+			min-height: 220px;
+			overflow: hidden;
+			display: flex;
+			align-items: stretch;
+			justify-content: center;
+		}
+		#bg-video {
+			display: block;
+			width: 100vw;
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+			opacity: 0.5;
+			background: transparent;
+			margin: 0 auto;
+			position: absolute;
+			top: 0; left: 0; right: 0; bottom: 0;
+			z-index: 0;
+			pointer-events: none;
+		}
+		.hero-section {
+			position: absolute;
+			top: 0; left: 0; right: 0; bottom: 0;
+			z-index: 1;
+			width: 100vw;
+			height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			pointer-events: none;
+		}
+		.hero-content {
+			pointer-events: auto;
+			text-align: center;
+			color: #fff;
+			padding: clamp(1rem, 4vw, 2.5rem);
+			max-width: 90ch;
+			margin: 0 2vw;
+			background: rgba(0,0,0,0.18);
+			border-radius: 12px;
+			backdrop-filter: blur(6px);
+			box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+		}
+		.hero-title{
+			margin: 0 0 .5rem 0;
+			font-size: clamp(28px, 6vw, 56px);
+			line-height: 1.02;
+			letter-spacing: -0.01em;
+			text-shadow: 0 6px 18px rgba(0,0,0,0.6);
+			font-weight: 700;
+		}
+		.hero-sub{
+			margin: 0 0 1rem 0;
+			font-size: clamp(14px, 3vw, 20px);
+			opacity: 0.95;
+		}
+		.hero-cta{
+			display: inline-block;
+			padding: .65rem 1.1rem;
+			border-radius: 10px;
+			background: #ff7a18;
+			color: #fff;
+			text-decoration: none;
+			font-weight: 600;
+			font-size: clamp(14px, 2.2vw, 18px);
+			box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+		}
+		.hero-cta:focus, .hero-cta:hover{ filter: brightness(.95); }
+
+		@media (max-width: 900px) {
+			.hero-video-wrap {
+				height: min(36vh, 240px);
+				min-height: 120px;
+			}
+		}
+		@media (max-width: 700px) {
+			.hero-video-wrap {
+				height: min(32vh, 180px);
+				min-height: 100px;
+				max-height: none;
+			}
+			.hero-content { padding: 0.7rem 0.3rem; }
+		}
+		@media (max-width: 500px) {
+			.hero-content {
+				padding: 0.7rem 0.3rem;
+			}
+		}
+
+		/* Review Section Styles */
+		.review-section {
+			position: relative;
+			width: 100vw;
+			min-height: 320px;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			display: flex;
+			align-items: stretch;
+			justify-content: flex-start;
+		}
+		.review-bg {
+			position: absolute;
+			inset: 0;
+			width: 100vw;
+			height: 100%;
+			background: url('reviewbg.jpeg') center center/cover no-repeat;
+			opacity: 0.85;
+			z-index: 0;
+			transition: background-size 0.2s;
+		}
+		.review-carousel-container {
+			position: relative;
+			z-index: 1;
+			display: flex;
+			align-items: flex-start;
+			justify-content: flex-start;
+			width: 100vw;
+			min-height: 320px;
+		}
+		.review-carousel {
+			max-width: 420px;
+			width: min(90vw, 420px);
+			margin: clamp(1.2rem, 6vw, 3.5rem) 0 clamp(1.2rem, 6vw, 3.5rem) clamp(2vw, 6vw, 6vw);
+			background: rgba(30,30,30,0.92);
+			border-radius: 14px;
+			box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+			padding: clamp(1rem, 3vw, 1.5rem) clamp(0.5rem, 2vw, 1.2rem) clamp(1rem, 2vw, 1.2rem) clamp(0.5rem, 2vw, 1.2rem);
+			text-align: left;
+			position: relative;
+		}
+		.review-rating {
+			display: flex;
+			align-items: center;
+			gap: 2px;
+			margin-bottom: 1rem;
+			font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+		}
+		.star {
+			color: #FFD700;
+			font-size: 1.5em;
+			line-height: 1;
+			display: inline-block;
+			position: relative;
+		}
+		.star.empty {
+			color: #333;
+		}
+		.rating-text {
+			color: #fff;
+			font-size: 1.1em;
+			margin-left: 0.5em;
+			opacity: 0.85;
+		}
+		.review-slider {
+			display: flex;
+			align-items: center;
+			gap: 0.5em;
+		}
+		.review-arrow {
+			background: none;
+			border: none;
+			color: #ff7a18;
+			font-size: 2em;
+			cursor: pointer;
+			padding: 0 0.3em;
+			transition: color 0.18s;
+			user-select: none;
+		}
+		.review-arrow:focus,
+		.review-arrow:hover {
+			color: #ffb347;
+		}
+		.review-content {
+			flex: 1 1 0;
+			min-width: 0;
+			padding: 0 0.5em;
+			text-align: left;
+		}
+		.review-text {
+			font-size: clamp(1em, 2.5vw, 1.08em);
+			color: #eee;
+			margin-bottom: 0.7em;
+			line-height: 1.4;
+		}
+		.review-person {
+			display: flex;
+			align-items: center;
+			gap: 0.7em;
+		}
+		.review-avatar {
+			width: 38px;
+			height: 38px;
+			border-radius: 50%;
+			object-fit: cover;
+			background: #444;
+			border: 2px solid #ff7a18;
+		}
+		.review-name {
+			font-weight: 600;
+			color: #fff;
+			font-size: 1em;
+		}
+		.review-date {
+			color: #bbb;
+			font-size: 0.95em;
+			margin-left: 0.3em;
+		}
+
+		@media (max-width: 900px) {
+			.review-carousel {
+				margin-left: 2vw;
+			}
+		}
+		@media (max-width: 700px) {
+			.hero-video-wrap {
+				height: min(36vh, 240px);
+				min-height: 120px;
+				max-height: 240px;
+			}
+			.hero-section {
+				min-height: 100px;
+			}
+			.review-section,
+			.review-carousel-container {
+				min-height: 220px;
+			}
+			.review-carousel {
+				margin: 1.2rem 0 1.2rem 1vw;
+				padding: 1rem 0.5rem 1rem 0.5rem;
+			}
+			.review-content { padding: 0 0.2em; }
+		}
+		@media (max-width: 500px) {
+			.hero-content {
+				padding: 0.7rem 0.3rem;
+			}
+			.review-carousel {
+				max-width: 98vw;
+				width: 98vw;
+				margin-left: 1vw;
+				margin-right: 1vw;
+			}
+			.review-bg {
+				background-position: center center;
+				background-size: cover;
+			}
+		}
+		/* ...existing code... */
 	</style>
 <!-- replace/add script: menu toggle + cart badge helpers -->
 <script>
@@ -518,6 +819,56 @@
 		if (document.readyState === 'loading') {
 			document.addEventListener('DOMContentLoaded', updateCartCount);
 		} else updateCartCount();
+	})();
+
+	// Review carousel logic
+	(function(){
+		const reviews = [
+			{
+				text: "Great service and fast shipping. The part fit perfectly and was much cheaper than anywhere else. Highly recommended!",
+				name: "Alex P.",
+				date: "May 2024",
+				avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+			},
+			{
+				text: "I was skeptical at first but the quality is top notch. Customer support was helpful and responsive.",
+				name: "Maria L.",
+				date: "April 2024",
+				avatar: "https://randomuser.me/api/portraits/women/65.jpg"
+			},
+			{
+				text: "Easy to find what I needed and checkout was a breeze. Will definitely shop here again.",
+				name: "Chris D.",
+				date: "March 2024",
+				avatar: "https://randomuser.me/api/portraits/men/76.jpg"
+			}
+		];
+		let idx = 0;
+		const reviewContent = document.querySelector('.review-content');
+		const leftBtn = document.querySelector('.review-arrow.left');
+		const rightBtn = document.querySelector('.review-arrow.right');
+		function renderReview(i) {
+			const r = reviews[i];
+			reviewContent.innerHTML = `
+				<div class="review-text">"${r.text}"</div>
+				<div class="review-person">
+					<img class="review-avatar" src="${r.avatar}" alt="${r.name}">
+					<div>
+						<span class="review-name">${r.name}</span>
+						<span class="review-date">${r.date}</span>
+					</div>
+				</div>
+			`;
+		}
+		leftBtn.addEventListener('click', () => {
+			idx = (idx + reviews.length - 1) % reviews.length;
+			renderReview(idx);
+		});
+		rightBtn.addEventListener('click', () => {
+			idx = (idx + 1) % reviews.length;
+			renderReview(idx);
+		});
+		renderReview(idx);
 	})();
 </script>
 </body>
