@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>M&D — Cart</title>
+</head>
+<body>
+	<header class="site-header">
+		<a href="index.html" class="logo-link" aria-label="M&D home">
+			<img src="logo.png" alt="M&D logo" class="logo">
+		</a>
+		<nav id="site-nav" class="nav-buttons" role="navigation">
+			<a class="nav-link" href="index.html">Home</a>
+			<a class="nav-link" href="shop.html">Shop</a>
+			<a class="nav-link" href="about.html">About</a>
+		</nav>
+
+		<div class="header-actions">
+			<button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">
+				<span class="bar"></span>
+				<span class="bar"></span>
+				<span class="bar"></span>
+			</button>
+
+			<a class="cart-button" href="cart.html" aria-label="Open cart">
+				<img src="cart.png" alt="" class="cart-icon" aria-hidden="true">
+				<span class="cart-count" aria-hidden="true">0</span>
+			</a>
+		</div>
+	</header>
+
+	<main class="page-main" role="main">
+		<div class="container">
+			<h1>Shopping Cart</h1>
+			<div class="empty-cart">
+				<p>Your cart is empty.</p>
+				<a class="button-like" href="shop.html">Continue shopping</a>
+			</div>
+
+			<!-- placeholder for rendered cart -->
+			<div id="cart-root" style="display:none;">
+				<table id="cart-table" style="width:100%; border-collapse:collapse;">
+					<thead style="text-align:left;color:#ddd;">
+						<tr><th>Product</th><th>Qty</th><th>Price</th><th></th></tr>
+					</thead>
+					<tbody id="cart-items" style="color:#fff;"></tbody>
+				</table>
+				<div id="cart-total" style="margin-top:12px;color:#ddd;font-weight:600;"></div>
+				<button id="clear-cart" class="button-like" style="margin-top:12px;">Clear cart</button>
+			</div>
+		</div>
+	</main>
+
+	<footer class="site-footer">
+		Copyright M&D
+	</footer>
+
+	<style>
+		/* ...reused responsive/site-wide styles from index.html... */
+		*, *::before, *::after { box-sizing: border-box; }
+		html { -webkit-text-size-adjust: 100%; }
+		body {
+			margin: 0;
+			background: #181818;
+			color: #fff;
+			padding-bottom: clamp(72px, 10vh, 120px);
+			font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+			font-size: clamp(14px, 1.6vw, 18px);
+			line-height: 1.35;
+		}
+
+		/* Header / logo / nav / footer styles (copied from index) */
+		.site-header {
+			width: 100%;
+			background: #222;
+			color: #fff;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: clamp(12px, 3.5vw, 32px) 0;
+			border-radius: 0 0 32px 32px;
+			border-bottom: 2px solid #333;
+			box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+			position: relative;
+			z-index: 101;
+			gap: clamp(12px, 2.5vw, 32px);
+		}
+		.logo { height: clamp(40px, 6vw, 56px); margin-right: clamp(12px, 3vw, 32px); margin-left: clamp(12px, 3vw, 32px); max-width: 40%; object-fit: contain; }
+
+		.nav-buttons { display: flex; flex: 1; justify-content: center; gap: clamp(12px, 3vw, 48px); flex-wrap: wrap; padding: 0 8px; }
+		.nav-buttons button { background: #333; color: #fff; border: none; padding: clamp(8px, 2vw, 16px) clamp(12px, 3vw, 32px); font-size: clamp(14px, 1.8vw, 20px); border-radius: 8px; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+		.nav-buttons button:hover { background: #444; }
+
+		.site-footer {
+			width: 100%;
+			background: #222;
+			color: #fff;
+			text-align: center;
+			padding: clamp(12px, 2.5vw, 24px) 0;
+			position: fixed;
+			left: 0;
+			bottom: 0;
+			border-radius: 32px 32px 0 0;
+			border-top: 2px solid #333;
+			box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+			font-size: clamp(14px, 1.4vw, 18px);
+			z-index: 100;
+		}
+
+		.menu-toggle{
+			display: none;
+			background: transparent;
+			border: none;
+			width: 48px;
+			height: 48px;
+			padding: 6px;
+			cursor: pointer;
+			align-self: center;
+			margin-right: clamp(12px, 3vw, 32px);
+			position: relative;
+			z-index: 140;
+			touch-action: manipulation;
+		}
+		.menu-toggle .bar{ display:block; height:2px; width:22px; background:#fff; margin:4px auto; transition: transform .22s ease, opacity .18s ease; border-radius:2px; }
+		.menu-toggle[aria-expanded="true"] .bar:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+		.menu-toggle[aria-expanded="true"] .bar:nth-child(2){ opacity: 0; }
+		.menu-toggle[aria-expanded="true"] .bar:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
+
+		.site-header { --header-height: clamp(56px, 10vw, 72px); }
+
+		@media (max-width: 600px) {
+			.menu-toggle{ display: block; }
+			.site-header{
+				flex-direction: row;
+				align-items: center;
+				justify-content: space-between;
+				height: var(--header-height);
+				padding: 0 12px;
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				border-radius: 0 0 12px 12px;
+				box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+				z-index: 120;
+			}
+			.logo { margin: 0; margin-left: 12px; height: clamp(36px, 8vw, 48px); max-width: 50%; }
+			.menu-toggle { margin: 0; margin-right: 12px; align-self: center; }
+
+			.nav-buttons{
+				position: fixed;
+				left: 12px;
+				right: 12px;
+				top: calc(var(--header-height) + 12px);
+				display: flex;
+				flex-direction: column;
+				background: #222;
+				padding: 12px;
+				gap: 8px;
+				border-radius: 12px;
+				z-index: 130;
+				max-height: 60vh;
+				overflow: auto;
+				transform: translateY(-120%);
+				transition: transform .28s ease, opacity .2s ease;
+				opacity: 0;
+				box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+				pointer-events: none;
+			}
+			.nav-buttons.open{ transform: translateY(0); opacity: 1; pointer-events: auto; }
+			.site-header { z-index: 135; }
+			.nav-buttons button { width: 100%; max-width: none; margin: 0; padding: clamp(10px, 2.6vw, 14px); font-size: clamp(14px, 3vw, 16px); }
+
+			.header-actions{ margin-left: 0; margin-right: 12px; gap: 8px; display: flex; align-items: center; }
+			.cart-button { order: 1; }
+			.menu-toggle { order: 2; }
+			.cart-button{ padding: 8px; min-width: 44px; min-height: 44px; }
+
+			body { padding-top: calc(var(--header-height) + 16px); padding-bottom: clamp(72px, 10vh, 120px); }
+		}
+
+		.header-actions{ display:flex; align-items:center; gap: clamp(8px, 2.2vw, 16px); margin-left: auto; margin-right: clamp(12px, 3vw, 32px); }
+
+		.cart-button{
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 8px;
+			background: #333;
+			color: #fff;
+			border: none;
+			padding: 10px;
+			border-radius: 10px;
+			cursor: pointer;
+			min-width: 44px;
+			min-height: 44px;
+			position: relative;
+			text-decoration: none;
+		}
+		.cart-button .cart-icon{ display:block; width:20px; height:20px; object-fit:contain; }
+		.cart-button:hover{ background:#444; }
+
+		.cart-count{
+			position: absolute;
+			top: 6px;
+			right: 6px;
+			min-width: 12px;
+			height: 12px;
+			padding: 0 4px;
+			border-radius: 999px;
+			background: #ff4d4f;
+			color: #fff;
+			font-size: 12px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			line-height: 1;
+		}
+
+		/* page main styles */
+		.page-main { padding: clamp(24px, 4vw, 48px); max-width: 1000px; margin: 0 auto; min-height: 60vh; }
+		.container { width: 100%; }
+		.empty-cart { text-align: center; color: #ddd; margin-top: 18px; }
+		.empty-cart p { margin: 0 0 12px; }
+		.button-like { background: #333; color:#fff; padding: 10px 14px; border-radius:8px; text-decoration:none; display:inline-block; }
+
+		/* make nav links look like the nav buttons */
+		.nav-buttons a.nav-link{
+			background: #333;
+			color: #fff;
+			text-decoration: none;
+			padding: clamp(8px, 2vw, 16px) clamp(12px, 3vw, 32px);
+			font-size: clamp(14px, 1.8vw, 20px);
+			border-radius: 8px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			transition: background .2s;
+			white-space: nowrap;
+		}
+		.nav-buttons a.nav-link:hover{ background: #444; }
+
+		.logo-link{ display:inline-block; }
+	</style>
+
+	<script>
+		// unified site script (cart.html)
+		(function(){
+			const PAGE_SITE_TOKEN = 'site-v2';
+
+			(function ensureSiteToken(){
+				const stored = localStorage.getItem('md_site_start_token');
+				if (stored !== PAGE_SITE_TOKEN) {
+					localStorage.removeItem('md_cart');
+					localStorage.setItem('md_site_start_token', PAGE_SITE_TOKEN);
+					localStorage.setItem('md_cart_sync', Date.now().toString());
+				}
+			})();
+
+			function getCart() {
+				try { return JSON.parse(localStorage.getItem('md_cart') || '[]'); } catch (e) { return []; }
+			}
+			function saveCart(cart) {
+				localStorage.setItem('md_cart', JSON.stringify(cart));
+				localStorage.setItem('md_cart_sync', Date.now().toString());
+			}
+			function updateCartCount() {
+				const cart = getCart();
+				const totalQty = cart.reduce((s, i) => s + (i.qty || 1), 0);
+				document.querySelectorAll('.cart-count').forEach(el => el.textContent = totalQty);
+			}
+
+			/* Menu toggle (shared) */
+			(function bindMenuToggle(){
+				const toggle = document.querySelector('.menu-toggle');
+				const nav = document.getElementById('site-nav');
+				if (!toggle || !nav) return;
+				toggle.addEventListener('click', (e) => {
+					e.stopPropagation();
+					const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+					toggle.setAttribute('aria-expanded', String(!isOpen));
+					toggle.setAttribute('aria-label', !isOpen ? 'Close menu' : 'Open menu');
+					nav.classList.toggle('open', !isOpen);
+				});
+				nav.addEventListener('click', (e) => e.stopPropagation());
+				window.addEventListener('resize', () => {
+					if (window.innerWidth > 600) {
+						toggle.setAttribute('aria-expanded','false');
+						nav.classList.remove('open');
+					}
+				});
+				document.addEventListener('click', (e) => {
+					if (window.innerWidth <= 600 && nav.classList.contains('open')) {
+						if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+							toggle.setAttribute('aria-expanded','false');
+							nav.classList.remove('open');
+						}
+					}
+				});
+			})();
+
+			/* Cart rendering & controls (if cart-root exists) */
+			const cartRoot = document.getElementById('cart-root');
+			function renderCart() {
+				const cart = getCart();
+				const emptyEl = document.querySelector('.empty-cart');
+				const root = document.getElementById('cart-root');
+				const tbody = document.getElementById('cart-items');
+				const totalEl = document.getElementById('cart-total');
+
+				if (!cart || !cart.length) {
+					if (emptyEl) emptyEl.style.display = '';
+					if (root) root.style.display = 'none';
+					if (tbody) tbody.innerHTML = '';
+					if (totalEl) totalEl.textContent = '';
+					updateCartCount();
+					return;
+				}
+
+				if (emptyEl) emptyEl.style.display = 'none';
+				if (root) root.style.display = '';
+				if (tbody) tbody.innerHTML = '';
+
+				let total = 0;
+				cart.forEach(item => {
+					const price = parseFloat(item.price || 0);
+					const qty = item.qty || 1;
+					const line = price * qty;
+					total += line;
+					const tr = document.createElement('tr');
+					tr.innerHTML = `
+						<td style="padding:8px 6px; border-bottom:1px solid #333">${item.name}</td>
+						<td style="padding:8px 6px; border-bottom:1px solid #333">${qty}</td>
+						<td style="padding:8px 6px; border-bottom:1px solid #333">$${line.toFixed(2)}</td>
+						<td style="padding:8px 6px; border-bottom:1px solid #333">
+							<button class="remove-btn" data-id="${item.id}" style="background:#ff4d4f;color:#fff;border:none;padding:6px 8px;border-radius:6px;cursor:pointer;">Remove</button>
+						</td>
+					`;
+					tbody.appendChild(tr);
+				});
+
+				if (totalEl) totalEl.textContent = 'Total: $' + total.toFixed(2);
+				updateCartCount();
+			}
+
+			if (cartRoot) {
+				// Remove item (delegated)
+				document.addEventListener('click', (e) => {
+					if (e.target.matches('.remove-btn')) {
+						const id = e.target.dataset.id;
+						let cart = getCart();
+						cart = cart.filter(i => i.id !== id);
+						saveCart(cart);
+						renderCart();
+					}
+				});
+				// Clear button
+				const clearBtn = document.getElementById('clear-cart');
+				if (clearBtn) {
+					clearBtn.addEventListener('click', () => {
+						localStorage.removeItem('md_cart');
+						localStorage.setItem('md_cart_sync', Date.now().toString());
+						renderCart();
+					});
+				}
+			}
+
+			/* Storage event: update badge and cart list */
+			window.addEventListener('storage', (ev) => {
+				if (ev.key === 'md_cart' || ev.key === 'md_cart_sync') {
+					updateCartCount();
+					if (cartRoot) renderCart();
+				}
+			});
+
+			/* Init */
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', () => {
+					updateCartCount();
+					if (cartRoot) renderCart();
+				});
+			} else {
+				updateCartCount();
+				if (cartRoot) renderCart();
+			}
+		})();
+	</script>
+</body>
+</html>

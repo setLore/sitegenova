@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>M&D — Shop</title>
+	<style>
+		/* Basic shared header/footer + simple product grid */
+		*, *::before, *::after { box-sizing: border-box; }
+		body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; background:#181818; color:#fff; padding-bottom:120px; }
+		.site-header { width:100%; background:#222; padding:20px; display:flex; align-items:center; gap:16px; border-radius:0 0 16px 16px; }
+		.logo { height:48px; margin-left:12px; }
+		.nav-buttons { display:flex; gap:12px; margin-left:auto; }
+		.nav-buttons a { background:#333; color:#fff; padding:8px 12px; border-radius:8px; text-decoration:none; }
+		.header-actions{ display:flex; gap:12px; margin-left:12px; align-items:center; }
+		.cart-button{ background:#333; color:#fff; padding:8px; border-radius:10px; text-decoration:none; position:relative; display:inline-flex; align-items:center; }
+		.cart-count{ position:absolute; top:6px; right:6px; background:#ff4d4f; padding:0 6px; border-radius:999px; font-size:12px; }
+		.page-main { max-width:1000px; margin:24px auto; padding:0 16px; }
+		.products { display:grid; grid-template-columns: repeat(3,1fr); gap:16px; }
+		.product { background:#222; padding:12px; border-radius:10px; text-align:center; }
+		.product img{ width:100%; height:140px; object-fit:cover; border-radius:6px; background:#111; }
+		.product h3{ margin:10px 0 6px; font-size:16px; }
+		.product p{ margin:0 0 12px; color:#ccc; }
+		.button-like, .add-btn { background:#333; color:#fff; padding:8px 12px; border-radius:8px; border:none; cursor:pointer; }
+		@media (max-width:800px){ .products{ grid-template-columns: repeat(2,1fr); } }
+		@media (max-width:480px){ .products{ grid-template-columns: 1fr; } .logo{height:40px;} }
+	</style>
+</head>
+<body>
+	<header class="site-header">
+		<a href="index.html" class="logo-link" aria-label="M&D home">
+			<img src="logo.png" alt="M&D logo" class="logo">
+		</a>
+		<nav id="site-nav" class="nav-buttons" role="navigation">
+			<a class="nav-link" href="index.html">Home</a>
+			<a class="nav-link" href="shop.html">Shop</a>
+			<a class="nav-link" href="about.html">About</a>
+		</nav>
+
+		<div class="header-actions">
+			<button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">
+				<span class="bar"></span>
+				<span class="bar"></span>
+				<span class="bar"></span>
+			</button>
+
+			<a class="cart-button" href="cart.html" aria-label="Open cart">
+				<img src="cart.png" alt="" class="cart-icon" aria-hidden="true" style="width:20px;height:20px;">
+				<span class="cart-count" aria-hidden="true">0</span>
+			</a>
+		</div>
+	</header>
+
+	<main class="page-main" role="main">
+		<h1>Shop</h1>
+		<div class="products" id="product-grid">
+			<!-- 9 product cards -->
+			<!-- For brevity images are placeholders; replace src with real images if available -->
+			<div class="product" data-id="p1" data-name="Leather Wallet" data-price="29.00">
+				<img src="product1.png" alt="Leather Wallet">
+				<h3>Leather Wallet</h3>
+				<p>$29.00</p>
+				<button class="add-btn" type="button">Add to cart</button>
+			</div>
+			<div class="product" data-id="p2" data-name="Canvas Backpack" data-price="59.00">
+				<img src="product2.png" alt="Canvas Backpack">
+				<h3>Canvas Backpack</h3>
+				<p>$59.00</p>
+				<button class="add-btn" type="button">Add to cart</button>
+			</div>
+			<div class="product" data-id="p3" data-name="Sunglasses" data-price="19.50">
+				<img src="product3.png" alt="Sunglasses">
+				<h3>Sunglasses</h3>
+				<p>$19.50</p>
+				<button class="add-btn" type="button">Add to cart</button>
+			</div>
+			<div class="product" data-id="p4" data-name="Beanie" data-price="15.00">
+				<img src="product4.png" alt="Beanie">
+				<h3>Beanie</h3>
+				<p>$15.00</p>
+				<button class="add-btn" type="button">Add to cart</button>
+			</div>
+			<div class="product" data-id="p5" data-name="Sneakers" data-price="79.00">
+				<img src="product5.png" alt="Sneakers">
+				<h3>Sneakers</h3>
+				<p>$79.00</p>
+				<button class="add-btn" type="button">Add to cart</button>
+			</div>
+			<div class="product" data-id="p6" data-name="Watch" data-price="129.00">
+				<img src="product6.png" alt="Watch">
+				<h3>Watch</h3>
+				<p>$129.00</p>
+				<button class="add-btn" type="button">Add to cart</button>
+			</div>
+			<div class="product" data-id="p7" data-name="T-Shirt" data-price="22.00">
+				<img src="product7.png" alt="T-Shirt">
+				<h3>T-Shirt</h3>
+				<p>$22.00</p>
+				<button class="add-btn" type="button">Add to cart</button>
+			</div>
+			<div class="product" data-id="p8" data-name="Water Bottle" data-price="12.00">
+				<img src="product8.png" alt="Water Bottle">
+				<h3>Water Bottle</h3>
+				<p>$12.00</p>
+				<button class="add-btn" type="button">Add to cart</button>
+			</div>
+			<div class="product" data-id="p9" data-name="Headphones" data-price="89.00">
+				<img src="product9.png" alt="Headphones">
+				<h3>Headphones</h3>
+				<p>$89.00</p>
+				<button class="add-btn" type="button">Add to cart</button>
+			</div>
+		</div>
+	</main>
+
+	<footer class="site-footer" style="position:fixed;left:0;right:0;bottom:0;background:#222;color:#fff;text-align:center;padding:12px;border-radius:12px 12px 0 0;">
+		Copyright M&D
+	</footer>
+
+	<!-- unified site script (shop.html) -->
+	<script>
+		(function(){
+			const PAGE_SITE_TOKEN = 'site-v2';
+
+			// If token changed, clear cart and notify other tabs
+			(function ensureSiteToken(){
+				const stored = localStorage.getItem('md_site_start_token');
+				if (stored !== PAGE_SITE_TOKEN) {
+					localStorage.removeItem('md_cart');
+					localStorage.setItem('md_site_start_token', PAGE_SITE_TOKEN);
+					localStorage.setItem('md_cart_sync', Date.now().toString());
+				}
+			})();
+
+			/* Shared cart helpers */
+			function getCart() {
+				try { return JSON.parse(localStorage.getItem('md_cart') || '[]'); } catch (e) { return []; }
+			}
+			function saveCart(cart) {
+				localStorage.setItem('md_cart', JSON.stringify(cart));
+				localStorage.setItem('md_cart_sync', Date.now().toString());
+			}
+			function updateCartCount() {
+				const cart = getCart();
+				const totalQty = cart.reduce((s, i) => s + (i.qty || 1), 0);
+				document.querySelectorAll('.cart-count').forEach(el => el.textContent = totalQty);
+			}
+
+			/* Menu toggle (shared) */
+			(function bindMenuToggle(){
+				const toggle = document.querySelector('.menu-toggle');
+				const nav = document.getElementById('site-nav');
+				if (!toggle || !nav) return;
+				toggle.addEventListener('click', (e) => {
+					e.stopPropagation();
+					const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+					toggle.setAttribute('aria-expanded', String(!isOpen));
+					toggle.setAttribute('aria-label', !isOpen ? 'Close menu' : 'Open menu');
+					nav.classList.toggle('open', !isOpen);
+				});
+				nav.addEventListener('click', (e) => e.stopPropagation());
+				window.addEventListener('resize', () => {
+					if (window.innerWidth > 600) {
+						toggle.setAttribute('aria-expanded','false');
+						nav.classList.remove('open');
+					}
+				});
+				document.addEventListener('click', (e) => {
+					if (window.innerWidth <= 600 && nav.classList.contains('open')) {
+						if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+							toggle.setAttribute('aria-expanded','false');
+							nav.classList.remove('open');
+						}
+					}
+				});
+			})();
+
+			/* Shop: Add to cart (if product grid exists) */
+			const productGrid = document.getElementById('product-grid');
+			if (productGrid) {
+				function addToCart(item) {
+					const cart = getCart();
+					const idx = cart.findIndex(i => i.id === item.id);
+					if (idx > -1) cart[idx].qty = (cart[idx].qty || 1) + 1;
+					else cart.push({ ...item, qty: 1 });
+					saveCart(cart);
+					updateCartCount();
+				}
+				document.addEventListener('click', (e) => {
+					if (e.target.matches('.add-btn')) {
+						const card = e.target.closest('.product');
+						if (!card) return;
+						const id = card.dataset.id;
+						const name = card.dataset.name;
+						const price = parseFloat(card.dataset.price || '0');
+						addToCart({ id, name, price });
+						// UI feedback
+						const btn = e.target;
+						const prev = btn.textContent;
+						btn.textContent = 'Added';
+						setTimeout(() => btn.textContent = prev, 700);
+					}
+				});
+			}
+
+			/* React to storage changes */
+			window.addEventListener('storage', (ev) => {
+				if (ev.key === 'md_cart' || ev.key === 'md_cart_sync') {
+					updateCartCount();
+				}
+			});
+
+			/* Init badge on load */
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', updateCartCount);
+			} else {
+				updateCartCount();
+			}
+		})();
+	</script>
+</body>
+</html>
