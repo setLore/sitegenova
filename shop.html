@@ -36,45 +36,63 @@
 	<!-- ...existing product grid content ... -->
 	<main class="page-main" role="main">
 		<h1>Shop</h1>
-		<div class="products" id="product-grid">
+		<div class="products" id="product-grid" tabindex="-1">
 			<!-- 9 product cards -->
 			<!-- For brevity images are placeholders; replace src with real images if available -->
-			<div class="product" data-id="p1" data-name="Turbo" data-price="1099">
-				<img src="turbo.png" alt="Turbo">
-				<h3>Turbo</h3>
-				<p>$1099</p>
-				<button class="add-btn" type="button">Add to cart</button>
-			</div>
-			<div class="product" data-id="p2" data-name="Intercooler" data-price="499">
-				<img src="intercooler.png" alt="Intercooler">
-				<h3>Intercooler</h3>
-				<p>$499</p>
-				<button class="add-btn" type="button">Add to cart</button>
-			</div>
-			<div class="product" data-id="p3" data-name="Intake" data-price="299">
-				<img src="intake.png" alt="Intake">
-				<h3>Cold Air Intake</h3>
-				<p>$299</p>
-				<button class="add-btn" type="button">Add to cart</button>
-			</div>
-			<div class="product" data-id="p4" data-name="Exhaust" data-price="999">
-				<img src="exhaust.png" alt="exhaust">
-				<h3>Exhaust System</h3>
-				<p>$999</p>
-				<button class="add-btn" type="button">Add to cart</button>
-			</div>
-			<div class="product" data-id="p5" data-name="Kess" data-price="79.00">
-				<img src="kess.png" alt="KESS V2 ECU Programmer">
-				<h3>KESS V2 ECU Programmer</h3>
-				<p>$2999</p>
-				<button class="add-btn" type="button">Add to cart</button>
-			</div>
-			<div class="product" data-id="p6" data-name="Coilovers" data-price="899">
-				<img src="coilover.png" alt="Coilovers">
-				<h3>Coilovers</h3>
-				<p>$899</p>
-				<button class="add-btn" type="button">Add to cart</button>
-			</div>
+				<div class="product" data-id="p1" data-name="Turbo" data-price="1099">
+					<img src="turbo.png" alt="Turbo">
+					<h3>Turbo</h3>
+					<p>$1099</p>
+					<div class="product-actions">
+						<button class="preview-btn" type="button" aria-label="Preview Turbo">Preview</button>
+						<button class="add-btn" type="button">Add to cart</button>
+					</div>
+				</div>
+				<div class="product" data-id="p2" data-name="Intercooler" data-price="499">
+					<img src="intercooler.png" alt="Intercooler">
+					<h3>Intercooler</h3>
+					<p>$499</p>
+					<div class="product-actions">
+						<button class="preview-btn" type="button" aria-label="Preview Intercooler">Preview</button>
+						<button class="add-btn" type="button">Add to cart</button>
+					</div>
+				</div>
+				<div class="product" data-id="p3" data-name="Intake" data-price="299">
+					<img src="intake.png" alt="Intake">
+					<h3>Cold Air Intake</h3>
+					<p>$299</p>
+					<div class="product-actions">
+						<button class="preview-btn" type="button" aria-label="Preview Intake">Preview</button>
+						<button class="add-btn" type="button">Add to cart</button>
+					</div>
+				</div>
+				<div class="product" data-id="p4" data-name="Exhaust" data-price="999">
+					<img src="exhaust.png" alt="exhaust">
+					<h3>Exhaust System</h3>
+					<p>$999</p>
+					<div class="product-actions">
+						<button class="preview-btn" type="button" aria-label="Preview Exhaust System">Preview</button>
+						<button class="add-btn" type="button">Add to cart</button>
+					</div>
+				</div>
+				<div class="product" data-id="p5" data-name="Kess" data-price="79.00">
+					<img src="kess.png" alt="KESS V2 ECU Programmer">
+					<h3>KESS V2 ECU Programmer</h3>
+					<p>$2999</p>
+					<div class="product-actions">
+						<button class="preview-btn" type="button" aria-label="Preview KESS V2 ECU Programmer">Preview</button>
+						<button class="add-btn" type="button">Add to cart</button>
+					</div>
+				</div>
+				<div class="product" data-id="p6" data-name="Coilovers" data-price="899">
+					<img src="coilover.png" alt="Coilovers">
+					<h3>Coilovers</h3>
+					<p>$899</p>
+					<div class="product-actions">
+						<button class="preview-btn" type="button" aria-label="Preview Coilovers">Preview</button>
+						<button class="add-btn" type="button">Add to cart</button>
+					</div>
+				</div>
 
 		</div>
 	</main>
@@ -200,5 +218,127 @@
 			}
 		})();
 	</script>
+
+		<!-- product preview modal -->
+		<div id="product-preview" class="preview-modal" aria-hidden="true">
+			<div class="pm-backdrop" data-action="close" tabindex="-1"></div>
+			<div class="pm-window" role="dialog" aria-modal="true" aria-labelledby="pm-title">
+				<button class="pm-close preview-btn" aria-label="Close preview">×</button>
+				<img class="pm-image" src="" alt="" />
+				<div class="pm-body">
+					<h2 id="pm-title"></h2>
+					<p class="pm-price"></p>
+					<p class="pm-desc"></p>
+					<div class="pm-actions">
+						<button class="modal-add add-btn" type="button">Add to cart</button>
+						<button class="pm-close-secondary preview-btn" type="button">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script>
+		// Modal preview script (standalone so it works independent from main IIFE)
+		(function(){
+			const descriptions = [
+				"High-performance part engineered for durability and peak power.",
+				"Precision-built component with excellent fitment and finish.",
+				"Popular choice among enthusiasts — reliable and great value.",
+				"Hand-tested item with a 12-month limited warranty.",
+				"Race-inspired design that improves throttle response and flow."
+			];
+
+			const preview = document.getElementById('product-preview');
+			const pmTitle = preview.querySelector('#pm-title');
+			const pmPrice = preview.querySelector('.pm-price');
+			const pmDesc = preview.querySelector('.pm-desc');
+			const pmImage = preview.querySelector('.pm-image');
+			const pmCloseBtns = preview.querySelectorAll('.pm-close, .pm-close-secondary');
+			const pmBackdrop = preview.querySelector('.pm-backdrop');
+			const modalAdd = preview.querySelector('.modal-add');
+			let lastActive = null;
+
+			function openModal(data, triggerEl){
+				lastActive = triggerEl || document.activeElement;
+				pmTitle.textContent = data.name || '';
+				pmPrice.textContent = data.price ? ('$' + data.price) : '';
+				pmImage.src = data.image || '';
+				pmImage.alt = data.name || '';
+				pmDesc.textContent = descriptions[Math.floor(Math.random()*descriptions.length)];
+				preview.setAttribute('aria-hidden', 'false');
+				preview.classList.add('open');
+				// focus close button for easy keyboard close
+				const btn = preview.querySelector('.pm-close');
+				if (btn) btn.focus();
+			}
+
+			function closeModal(){
+				preview.setAttribute('aria-hidden', 'true');
+				preview.classList.remove('open');
+				if (lastActive) {
+					// If the trigger came from inside a product, blur it to remove :focus-within
+					const insideProduct = lastActive.closest && lastActive.closest('.product');
+					if (insideProduct) {
+						try { lastActive.blur(); } catch(e) { /* ignore */ }
+						const grid = document.getElementById('product-grid');
+						if (grid && typeof grid.focus === 'function') grid.focus();
+					} else if (typeof lastActive.focus === 'function') {
+						lastActive.focus();
+					}
+				}
+			}
+
+			document.addEventListener('click', (e) => {
+				if (e.target.matches('.preview-btn')){
+					const card = e.target.closest('.product');
+					if (!card) return;
+					const data = {
+						id: card.dataset.id,
+						name: card.dataset.name || card.querySelector('h3')?.textContent,
+						price: card.dataset.price,
+						image: card.querySelector('img')?.getAttribute('src') || ''
+					};
+					openModal(data, e.target);
+				}
+				if (e.target === pmBackdrop || e.target.matches('[data-action="close"]')) closeModal();
+				if (e.target.matches('.pm-close-secondary')) closeModal();
+				if (e.target.matches('.modal-add')){
+					// simple add-to-cart: mirror main add logic to localStorage
+					const card = preview.querySelector('#pm-title');
+					const id = preview.querySelector('#pm-title')?.dataset?.id || null;
+					const name = pmTitle.textContent;
+					const priceText = pmPrice.textContent.replace(/[^0-9.]/g,'') || '0';
+					const price = parseFloat(priceText);
+					const img = pmImage.src || '';
+					// add to localStorage cart
+					try{
+						const cart = JSON.parse(localStorage.getItem('md_cart') || '[]');
+						const idx = cart.findIndex(i => i.id === id);
+						if (idx > -1) cart[idx].qty = (cart[idx].qty || 1) + 1;
+						else cart.push({ id: id || (name+Math.random()), name, price, image: img, qty: 1 });
+						localStorage.setItem('md_cart', JSON.stringify(cart));
+						localStorage.setItem('md_cart_sync', Date.now().toString());
+						// update visible counters
+						document.querySelectorAll('.cart-count').forEach(el => {
+							const total = cart.reduce((s,i)=> s + (i.qty||1), 0);
+							el.textContent = total;
+						});
+					}catch(err){/* ignore */}
+					// small feedback then close
+					const b = preview.querySelector('.modal-add');
+					const prev = b.textContent;
+					b.textContent = 'Added';
+					setTimeout(()=>{ b.textContent = prev; closeModal(); }, 700);
+				}
+			});
+
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape' && preview.classList.contains('open')) closeModal();
+			});
+
+			pmCloseBtns.forEach(btn => btn.addEventListener('click', closeModal));
+
+		})();
+		</script>
 </body>
 </html>
