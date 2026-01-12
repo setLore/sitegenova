@@ -428,15 +428,18 @@ body {
 
 /* Review Section Styles (use accent for arrows and avatar border) */
 .review-section {
-	position: relative;
 	width: 100vw;
-	min-height: 320px;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
+	position: relative;
+	left: 50%;
+	right: 50%;
+	margin-left: -50vw;
+	margin-right: -50vw;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	padding: 2rem 0;
 	display: flex;
-	align-items: stretch;
-	justify-content: flex-start;
+	align-items: center;
+	justify-content: center;
 }
 .review-bg {
 	position: absolute;
@@ -449,24 +452,32 @@ body {
 	transition: background-size 0.2s;
 }
 .review-carousel-container {
+	width: 90%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0;
 	position: relative;
 	z-index: 1;
 	display: flex;
 	align-items: flex-start;
-	justify-content: flex-start;
-	width: 100vw;
-	min-height: 320px;
+	justify-content: center;
 }
+
 .review-carousel {
-	max-width: 420px;
-	width: min(90vw, 420px);
-	margin: clamp(1.2rem, 6vw, 3.5rem) 0 clamp(1.2rem, 6vw, 3.5rem) clamp(2vw, 6vw, 6vw);
+	width: 100%;
+	max-width: none;
+	margin: 0;
+	padding: clamp(2rem, 5vw, 3rem) clamp(0.5rem, 2vw, 1.2rem);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	background: rgba(30,30,30,0.92);
 	border-radius: 14px;
 	box-shadow: 0 4px 18px rgba(0,0,0,0.18);
-	padding: clamp(1rem, 3vw, 1.5rem) clamp(0.5rem, 2vw, 1.2rem) clamp(1rem, 2vw, 1.2rem) clamp(0.5rem, 2vw, 1.2rem);
 	text-align: left;
 	position: relative;
+	min-height: 400px;
+	justify-content: center;
 }
 .review-rating {
 	display: flex;
@@ -493,8 +504,8 @@ body {
 }
 .review-slider {
 	display: flex;
+	justify-content: center;
 	align-items: center;
-	gap: 0.5em;
 }
 .review-arrow {
 	color: var(--accent);
@@ -511,16 +522,18 @@ body {
 	color: var(--accent-soft);
 }
 .review-content {
+	max-width: 800px;
+	width: 100%;
 	flex: 1 1 0;
 	min-width: 0;
 	padding: 0 0.5em;
 	text-align: left;
 }
 .review-text {
-	font-size: clamp(1em, 2.5vw, 1.08em);
-	color: var(--subtle); /* was #eee */
-	margin-bottom: 0.7em;
-	line-height: 1.4;
+	font-size: clamp(1.2em, 3vw, 1.4em);
+	color: var(--subtle);
+	margin-bottom: 1.2em;
+	line-height: 1.5;
 }
 .review-person {
 	display: flex;
@@ -528,8 +541,8 @@ body {
 	gap: 0.7em;
 }
 .review-avatar {
-	width: 38px;
-	height: 38px;
+	width: 48px;
+	height: 48px;
 	border-radius: 50%;
 	object-fit: cover;
 	background: #444;
@@ -538,11 +551,11 @@ body {
 .review-name {
 	font-weight: 600;
 	color: #fff;
-	font-size: 1em;
+	font-size: 1.15em;
 }
 .review-date {
 	color: #bbb;
-	font-size: 0.95em;
+	font-size: 1.05em;
 	margin-left: 0.3em;
 }
 
@@ -568,15 +581,18 @@ body {
 
 /* Review Section Styles (use accent for arrows and avatar border) */
 .review-section {
-	position: relative;
 	width: 100vw;
-	min-height: 320px;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
+	position: relative;
+	left: 50%;
+	right: 50%;
+	margin-left: -50vw;
+	margin-right: -50vw;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	padding: 2rem 0;
 	display: flex;
-	align-items: stretch;
-	justify-content: flex-start;
+	align-items: center;
+	justify-content: center;
 }
 .review-bg {
 	position: absolute;
@@ -589,24 +605,32 @@ body {
 	transition: background-size 0.2s;
 }
 .review-carousel-container {
+	width: 90%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0;
 	position: relative;
 	z-index: 1;
 	display: flex;
 	align-items: flex-start;
-	justify-content: flex-start;
-	width: 100vw;
-	min-height: 320px;
+	justify-content: center;
 }
+
 .review-carousel {
-	max-width: 420px;
-	width: min(90vw, 420px);
-	margin: clamp(1.2rem, 6vw, 3.5rem) 0 clamp(1.2rem, 6vw, 3.5rem) clamp(2vw, 6vw, 6vw);
+	width: 100%;
+	max-width: none;
+	margin: 0;
+	padding: clamp(2rem, 5vw, 3rem) clamp(0.5rem, 2vw, 1.2rem);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	background: rgba(30,30,30,0.92);
 	border-radius: 14px;
 	box-shadow: 0 4px 18px rgba(0,0,0,0.18);
-	padding: clamp(1rem, 3vw, 1.5rem) clamp(0.5rem, 2vw, 1.2rem) clamp(1rem, 2vw, 1.2rem) clamp(0.5rem, 2vw, 1.2rem);
 	text-align: left;
 	position: relative;
+	min-height: 400px;
+	justify-content: center;
 }
 .review-rating {
 	display: flex;
@@ -633,8 +657,8 @@ body {
 }
 .review-slider {
 	display: flex;
+	justify-content: center;
 	align-items: center;
-	gap: 0.5em;
 }
 .review-arrow {
 	color: var(--accent);
@@ -651,16 +675,18 @@ body {
 	color: var(--accent-soft);
 }
 .review-content {
+	max-width: 800px;
+	width: 100%;
 	flex: 1 1 0;
 	min-width: 0;
 	padding: 0 0.5em;
 	text-align: left;
 }
 .review-text {
-	font-size: clamp(1em, 2.5vw, 1.08em);
-	color: var(--subtle); /* was #eee */
-	margin-bottom: 0.7em;
-	line-height: 1.4;
+	font-size: clamp(1.2em, 3vw, 1.4em);
+	color: var(--subtle);
+	margin-bottom: 1.2em;
+	line-height: 1.5;
 }
 .review-person {
 	display: flex;
@@ -668,8 +694,8 @@ body {
 	gap: 0.7em;
 }
 .review-avatar {
-	width: 38px;
-	height: 38px;
+	width: 48px;
+	height: 48px;
 	border-radius: 50%;
 	object-fit: cover;
 	background: #444;
@@ -678,11 +704,11 @@ body {
 .review-name {
 	font-weight: 600;
 	color: #fff;
-	font-size: 1em;
+	font-size: 1.15em;
 }
 .review-date {
 	color: #bbb;
-	font-size: 0.95em;
+	font-size: 1.05em;
 	margin-left: 0.3em;
 }
 
@@ -723,5 +749,121 @@ body {
 	.review-bg {
 		background-position: center center;
 		background-size: cover;
+	}
+}
+
+/* Review scroll animation */
+@keyframes reviewSlide {
+	from {
+		opacity: 0;
+		transform: translateX(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+.nav-item-with-dropdown {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+}
+
+.nav-dropdown {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	background: var(--surface-darker);
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	min-width: 150px;
+	margin-top: 8px;
+	padding: 8px 0;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(-8px);
+	transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+	z-index: 200;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.nav-item-with-dropdown:hover .nav-dropdown {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+}
+
+.nav-dropdown-item {
+	display: block;
+	padding: 10px 16px;
+	color: var(--text);
+	text-decoration: none;
+	transition: background 0.2s;
+	white-space: nowrap;
+}
+
+.nav-dropdown-item:hover,
+.nav-dropdown-item:focus {
+	background: var(--accent);
+}
+
+/* About page styles */
+.page-main {
+	max-width: 1000px;
+	margin: 24px auto;
+	padding: 0 16px;
+}
+
+.about-section {
+	background: var(--surface);
+	padding: clamp(2rem, 5vw, 3rem);
+	border-radius: 12px;
+	color: var(--text);
+	line-height: 1.6;
+}
+
+.about-section h1 {
+	font-size: clamp(28px, 5vw, 48px);
+	margin: 0 0 1.5rem 0;
+	color: var(--accent);
+}
+
+.about-section h2 {
+	font-size: clamp(20px, 4vw, 32px);
+	margin: 2rem 0 1rem 0;
+	color: var(--accent-soft);
+}
+
+.about-section p {
+	margin: 1rem 0;
+	color: var(--subtle);
+	font-size: clamp(14px, 1.6vw, 18px);
+}
+
+.about-section ul {
+	margin: 1.5rem 0;
+	padding-left: 2rem;
+	list-style: none;
+}
+
+.about-section ul li {
+	margin: 0.8rem 0;
+	color: var(--subtle);
+	position: relative;
+	padding-left: 1.5rem;
+}
+
+.about-section ul li::before {
+	content: "✓";
+	position: absolute;
+	left: 0;
+	color: var(--accent);
+	font-weight: bold;
+}
+
+@media (max-width: 600px) {
+	.about-section {
+		padding: 1.5rem 1rem;
 	}
 }
