@@ -15,7 +15,13 @@
 		</a>
 		<nav id="site-nav" class="nav-buttons" role="navigation">
 			<a class="nav-link" href="index.html">Home</a>
-			<a class="nav-link" href="shop.html">Shop</a>
+			<div class="nav-item-with-dropdown">
+				<a class="nav-link" href="shop.html">Shop</a>
+				<div class="nav-dropdown" role="menu" aria-label="Shop categories">
+					<a class="nav-dropdown-item" href="shop.html?category=stage-one" role="menuitem">Stage 1</a>
+					<a class="nav-dropdown-item" href="shop.html?category=stage-two" role="menuitem">Stage 2</a>
+				</div>
+			</div>
 			<a class="nav-link" href="about.html">About</a>
 		</nav>
 
@@ -155,51 +161,75 @@
 					text: "Great service and fast shipping. The part fit perfectly and was much cheaper than anywhere else.",
 					name: "Alex P.",
 					date: "May 2024",
-					avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+					avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+					rating: 4
 				},
 				{
 					text: "I was skeptical at first but the quality is top notch. Customer support was helpful and responsive.",
 					name: "Maria L.",
 					date: "April 2024",
-					avatar: "https://randomuser.me/api/portraits/women/65.jpg"
+					avatar: "https://randomuser.me/api/portraits/women/65.jpg",
+					rating: 5
 				},
 				{
 					text: "Easy to find what I needed and checkout was a breeze. Will definitely shop here again.",
 					name: "Chris D.",
 					date: "March 2024",
-					avatar: "https://randomuser.me/api/portraits/men/76.jpg"
+					avatar: "https://randomuser.me/api/portraits/men/76.jpg",
+					rating: 5
 				}
 				,
 				{
 					text: "Fast delivery and excellent packaging. Part matched description and arrived earlier than expected.",
 					name: "Jordan K.",
 					date: "June 2024",
-					avatar: "https://randomuser.me/api/portraits/men/45.jpg"
+					avatar: "https://randomuser.me/api/portraits/men/45.jpg",
+					rating: 4
 				},
 				{
 					text: "Good value for the price. Support answered my questions quickly and installation was straightforward.",
 					name: "Sofia R.",
 					date: "June 2024",
-					avatar: "https://randomuser.me/api/portraits/women/48.jpg"
+					avatar: "https://randomuser.me/api/portraits/women/48.jpg",
+					rating: 4
 				}
 			];
 			let idx = 0;
 			const reviewContent = document.querySelector('.review-content');
+			const reviewRating = document.querySelector('.review-rating');
 			const leftBtn = document.querySelector('.review-arrow.left');
 			const rightBtn = document.querySelector('.review-arrow.right');
+			
+			function renderStars(rating) {
+				let starsHtml = '';
+				for (let i = 1; i <= 5; i++) {
+					starsHtml += `<span class="star ${i <= rating ? 'full' : 'empty'}">&#9733;</span>`;
+				}
+				return starsHtml + `<span class="rating-text">${rating}/5</span>`;
+			}
+			
 			function renderReview(i) {
 				const r = reviews[i];
-				reviewContent.innerHTML = `
-					<div class="review-text">"${r.text}"</div>
-					<div class="review-person">
-						<img class="review-avatar" src="${r.avatar}" alt="${r.name}">
-						<div>
-							<span class="review-name">${r.name}</span>
-							<span class="review-date">${r.date}</span>
+				reviewContent.style.animation = 'none';
+				reviewRating.style.animation = 'none';
+				
+				setTimeout(() => {
+					reviewRating.innerHTML = renderStars(r.rating);
+					reviewContent.innerHTML = `
+						<div class="review-text">"${r.text}"</div>
+						<div class="review-person">
+							<img class="review-avatar" src="${r.avatar}" alt="${r.name}">
+							<div>
+								<span class="review-name">${r.name}</span>
+								<span class="review-date">${r.date}</span>
+							</div>
 						</div>
-					</div>
-				`;
+					`;
+					reviewContent.style.animation = 'reviewSlide 0.4s ease-out';
+					reviewRating.style.animation = 'reviewSlide 0.4s ease-out';
+				}, 0);
 			}
+			
 			leftBtn.addEventListener('click', () => {
 				idx = (idx + reviews.length - 1) % reviews.length;
 				renderReview(idx);

@@ -4,18 +4,23 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>M&D — About</title>
-	<link rel="stylesheet" href="css/about.css">
+	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
-	<!-- header replaced with index.html header -->
 	<header class="site-header">
 		<a href="index.html" class="logo-link" aria-label="M&D home">
 			<img src="logo.png" alt="M&D logo" class="logo">
 		</a>
 		<nav id="site-nav" class="nav-buttons" role="navigation">
 			<a class="nav-link" href="index.html">Home</a>
-			<a class="nav-link" href="shop.html">Shop</a>
+			<div class="nav-item-with-dropdown">
+				<a class="nav-link" href="shop.html">Shop</a>
+				<div class="nav-dropdown" role="menu" aria-label="Shop categories">
+					<a class="nav-dropdown-item" href="shop.html?category=stage-one" role="menuitem">Stage 1</a>
+					<a class="nav-dropdown-item" href="shop.html?category=stage-two" role="menuitem">Stage 2</a>
+				</div>
+			</div>
 			<a class="nav-link" href="about.html">About</a>
 		</nav>
 
@@ -33,55 +38,25 @@
 		</div>
 	</header>
 
-	<!-- ...existing main content ... -->
 	<main class="page-main" role="main">
-		<div class="about-grid">
-			<section class="about-info">
-				<h1>About M&amp;D</h1>
-				<p>We supply quality performance and replacement parts for cars — fast shipping, transparent pricing and straightforward returns.
-				Our catalog includes turbos, exhaust systems, suspension, electronics and curated accessories from reputable suppliers.</p>
-
-				<h3>Why M&amp;D?</h3>
-				<ul>
-					<li>Carefully chosen parts tested by enthusiasts and mechanics.</li>
-					<li>Competitive pricing — no hidden fees.</li>
-					<li>Dedicated support for fitment and returns.</li>
-				</ul>
-
-				<h3>Contact &amp; Support</h3>
-				<address class="contact-details">
-					<div><strong>Email:</strong> <a href="mailto:contact@mandd.example">contact@mandd.example</a></div>
-					<div><strong>Phone:</strong> +1 (555) 123-4567</div>
-					<div><strong>Address:</strong> 123 Garage Lane, Motor City</div>
-					<div><strong>Hours:</strong> Mon–Fri 9:00–18:00</div>
-				</address>
-
-				<p>Follow us on socials or use the form to reach our support team directly. We aim to respond within one business day.</p>
-			</section>
-
-			<aside class="contact-form-wrap" aria-labelledby="contact-title">
-				<h2 id="contact-title">Send us a message</h2>
-				<form id="contact-form" class="contact-form" novalidate>
-					<label>
-						<span class="label-text">Name</span>
-						<input name="name" type="text" required autocomplete="name" />
-					</label>
-					<label>
-						<span class="label-text">Email</span>
-						<input name="email" type="email" required autocomplete="email" />
-					</label>
-					<label>
-						<span class="label-text">Message</span>
-						<textarea name="message" rows="6" required></textarea>
-					</label>
-					<button type="submit" class="button-like">Send message</button>
-					<div id="contact-confirm" class="contact-confirm" aria-live="polite" role="status"></div>
-				</form>
-			</aside>
-		</div>
+		<section class="about-section">
+			<h1>About M&D</h1>
+			<p>Welcome to M&D, your trusted source for premium automotive parts and performance upgrades. We are dedicated to providing high-quality components at competitive prices with fast and reliable shipping.</p>
+			
+			<h2>Our Mission</h2>
+			<p>To empower automotive enthusiasts with easy access to top-tier parts and exceptional customer service. We believe in making performance upgrades affordable and accessible to everyone.</p>
+			
+			<h2>Why Choose Us?</h2>
+			<ul>
+				<li>Hand-tested quality parts with 12-month warranty</li>
+				<li>Competitive pricing on all products</li>
+				<li>Fast and reliable shipping</li>
+				<li>Expert customer support</li>
+				<li>Easy returns and exchanges</li>
+			</ul>
+		</section>
 	</main>
 
-	<!-- footer replaced with index.html footer -->
 	<footer class="site-footer">
 		<div class="site-footer-inner">
 			<span class="footer-left">© M&amp;D 2025</span>
@@ -99,7 +74,6 @@
 		</div>
 	</footer>
 
-	<!-- ...existing scripts unchanged ... -->
 	<script>
 		// unified site script (about.html)
 		(function(){
@@ -157,39 +131,6 @@
 			if (document.readyState === 'loading') {
 				document.addEventListener('DOMContentLoaded', updateCartCount);
 			} else updateCartCount();
-		})();
-
-		// Contact form handling (clean)
-		(function(){
-			const form = document.getElementById('contact-form');
-			const confirmEl = document.getElementById('contact-confirm');
-			if (!form || !confirmEl) return;
-
-			form.addEventListener('submit', (e) => {
-				e.preventDefault();
-				const fd = new FormData(form);
-				const name = (fd.get('name') || '').trim();
-				const email = (fd.get('email') || '').trim();
-				const message = (fd.get('message') || '').trim();
-
-				// basic validation
-				if (!name || !email || !message || !/^\S+@\S+\.\S+$/.test(email)) {
-					confirmEl.style.color = 'var(--accent-strong)';
-					confirmEl.textContent = 'Please complete all fields with a valid email.';
-					return;
-				}
-
-				// store message locally (static demo)
-				try {
-					const messages = JSON.parse(localStorage.getItem('md_messages') || '[]');
-					messages.push({ name, email, message, created: Date.now() });
-					localStorage.setItem('md_messages', JSON.stringify(messages));
-				} catch (err) { /* ignore storage errors */ }
-
-				confirmEl.style.color = 'var(--accent)';
-				confirmEl.textContent = 'Thanks — your message was sent. We will reply within one business day.';
-				form.reset();
-			});
 		})();
 	</script>
 </body>
