@@ -16,84 +16,170 @@
 		<nav id="site-nav" class="nav-buttons" role="navigation">
 			<a class="nav-link" href="index.html">Home</a>
 			<a class="nav-link" href="shop.html">Shop</a>
+			<div class="nav-item-with-dropdown" style="display:none;">
+				<div class="nav-dropdown" role="menu" aria-label="Shop categories">
+					<a class="nav-dropdown-item" href="shop.html?category=turbo" role="menuitem">Turbo</a>
+					<a class="nav-dropdown-item" href="shop.html?category=intercooler" role="menuitem">Intercooler</a>
+					<a class="nav-dropdown-item" href="shop.html?category=intake" role="menuitem">Cold Air Intake</a>
+					<a class="nav-dropdown-item" href="shop.html?category=exhaust" role="menuitem">Exhaust System</a>
+					<a class="nav-dropdown-item" href="shop.html?category=kess" role="menuitem">KESS</a>
+					<a class="nav-dropdown-item" href="shop.html?category=coilovers" role="menuitem">Coilovers</a>
+				</div>
+			</div>
 			<a class="nav-link" href="about.html">About</a>
 		</nav>
 
 		<div class="header-actions">
+			<a class="cart-button" href="cart.html" aria-label="Open cart">
+				<i class="bi bi-cart cart-icon" aria-hidden="true"></i>
+				<span class="cart-count" aria-hidden="true">0</span>
+			</a>
 			<button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">
 				<span class="bar"></span>
 				<span class="bar"></span>
 				<span class="bar"></span>
 			</button>
-
-			<a class="cart-button" href="cart.html" aria-label="Open cart">
-				<i class="bi bi-cart cart-icon" aria-hidden="true"></i>
-				<span class="cart-count" aria-hidden="true">0</span>
-			</a>
 		</div>
 	</header>
 
 	<!-- ...existing product grid content ... -->
 	<main class="page-main" role="main">
-		<h1>Shop</h1>
+		<div class="page-header">
+			<h1>Shop</h1>
+			<div class="header-controls">
+				<div class="search-bar">
+					<input type="text" id="search-input" placeholder="Search products...">
+					<button class="search-btn" aria-label="Search">
+						<i class="bi bi-search" aria-hidden="true"></i>
+					</button>
+				</div>
+				<div class="sort-dropdown">
+					<button class="sort-btn" aria-label="Sort products" aria-expanded="false">
+						<span>Sort</span>
+						<i class="bi bi-funnel" aria-hidden="true"></i>
+					</button>
+					<ul class="sort-menu" role="menu">
+						<li role="none"><button role="menuitem" data-sort="default">Default</button></li>
+						<li role="none"><button role="menuitem" data-sort="price-low">Price: Low to High</button></li>
+						<li role="none"><button role="menuitem" data-sort="price-high">Price: High to Low</button></li>
+						<li role="none"><button role="menuitem" data-sort="name-asc">A - Z</button></li>
+						<li role="none"><button role="menuitem" data-sort="name-desc">Z - A</button></li>
+					</ul>
+				</div>
+			</div>
+		</div>
 		<div class="products" id="product-grid" tabindex="-1">
-			<!-- 9 product cards -->
-			<!-- For brevity images are placeholders; replace src with real images if available -->
-				<div class="product" data-id="p1" data-name="Turbo" data-price="1099">
-					<img src="turbo.png" alt="Turbo">
-					<h3>Turbo</h3>
-					<p>$1099</p>
-					<div class="product-actions">
-						<button class="preview-btn" type="button" aria-label="Preview Turbo">Preview</button>
-						<button class="add-btn" type="button">Add to cart</button>
-					</div>
+			<!-- Original 6 products with categories -->
+			<div class="product" data-id="p1" data-name="Turbo" data-price="1099" data-category="turbo">
+				<img src="turbo.png" alt="Turbo">
+				<h3>Turbo</h3>
+				<p>$1099</p>
+				<div class="product-actions">
+					<button class="preview-btn" type="button" aria-label="Preview Turbo">Preview</button>
+					<button class="add-btn" type="button">Add to cart</button>
 				</div>
-				<div class="product" data-id="p2" data-name="Intercooler" data-price="499">
-					<img src="intercooler.png" alt="Intercooler">
-					<h3>Intercooler</h3>
-					<p>$499</p>
-					<div class="product-actions">
-						<button class="preview-btn" type="button" aria-label="Preview Intercooler">Preview</button>
-						<button class="add-btn" type="button">Add to cart</button>
-					</div>
+			</div>
+			<div class="product" data-id="p2" data-name="Intercooler Sport" data-price="499" data-category="intercooler">
+				<img src="intercooler.png" alt="Intercooler Sport">
+				<h3>Intercooler Sport</h3>
+				<p>$499</p>
+				<div class="product-actions">
+					<button class="preview-btn" type="button" aria-label="Preview Intercooler Sport">Preview</button>
+					<button class="add-btn" type="button">Add to cart</button>
 				</div>
-				<div class="product" data-id="p3" data-name="Intake" data-price="299">
-					<img src="intake.png" alt="Intake">
-					<h3>Cold Air Intake</h3>
-					<p>$299</p>
-					<div class="product-actions">
-						<button class="preview-btn" type="button" aria-label="Preview Intake">Preview</button>
-						<button class="add-btn" type="button">Add to cart</button>
-					</div>
+			</div>
+			<div class="product" data-id="p3" data-name="Intake" data-price="299.00" data-category="intake">
+				<img src="intake.png" alt="Intake">
+				<h3>Cold Air Intake</h3>
+				<p>$299</p>
+				<div class="product-actions"> 
+					<button class="preview-btn" type="button" aria-label="Preview Intake">Preview</button>
+					<button class="add-btn" type="button">Add to cart</button>
 				</div>
-				<div class="product" data-id="p4" data-name="Exhaust" data-price="999">
-					<img src="exhaust.png" alt="exhaust">
-					<h3>Exhaust System</h3>
-					<p>$999</p>
-					<div class="product-actions">
-						<button class="preview-btn" type="button" aria-label="Preview Exhaust System">Preview</button>
-						<button class="add-btn" type="button">Add to cart</button>
-					</div>
+			</div>
+			<div class="product" data-id="p4" data-name="Exhaust" data-price="999.00" data-category="exhaust">
+				<img src="exhaust.png" alt="exhaust">
+				<h3>Exhaust System</h3>
+				<p>$999</p>
+				<div class="product-actions">
+					<button class="preview-btn" type="button" aria-label="Preview Exhaust System">Preview</button>
+					<button class="add-btn" type="button">Add to cart</button>
 				</div>
-				<div class="product" data-id="p5" data-name="Kess" data-price="79.00">
-					<img src="kess.png" alt="KESS V2 ECU Programmer">
-					<h3>KESS V2 ECU Programmer</h3>
-					<p>$2999</p>
-					<div class="product-actions">
-						<button class="preview-btn" type="button" aria-label="Preview KESS V2 ECU Programmer">Preview</button>
-						<button class="add-btn" type="button">Add to cart</button>
-					</div>
+			</div>
+			<div class="product" data-id="p5" data-name="Kess" data-price="2999.00" data-category="kess">
+				<img src="kess.png" alt="KESS V2 ECU Programmer">
+				<h3>KESS V2 ECU Programmer</h3>
+				<p>$2999</p>
+				<div class="product-actions">
+					<button class="preview-btn" type="button" aria-label="Preview KESS V2 ECU Programmer">Preview</button>
+					<button class="add-btn" type="button">Add to cart</button>
 				</div>
-				<div class="product" data-id="p6" data-name="Coilovers" data-price="899">
-					<img src="coilover.png" alt="Coilovers">
-					<h3>Coilovers</h3>
-					<p>$899</p>
-					<div class="product-actions">
-						<button class="preview-btn" type="button" aria-label="Preview Coilovers">Preview</button>
-						<button class="add-btn" type="button">Add to cart</button>
-					</div>
+			</div>
+			<div class="product" data-id="p6" data-name="Coilovers" data-price="899.00" data-category="coilovers">
+				<img src="coilover.png" alt="Coilovers">
+				<h3>Coilovers</h3>
+				<p>$899</p>
+				<div class="product-actions">
+					<button class="preview-btn" type="button" aria-label="Preview Coilovers">Preview</button>
+					<button class="add-btn" type="button">Add to cart</button>
 				</div>
+			</div>
 
+			<!-- New 6 products with categories -->
+			<div class="product" data-id="p7" data-name="Turbo Kit Pro" data-price="1399" data-category="turbo">
+				<img src="turbo2.png" alt="Turbo Kit Pro">
+				<h3>Turbo Kit Pro</h3>
+				<p>$1399</p>
+				<div class="product-actions">
+					<button class="preview-btn" type="button" aria-label="Preview Turbo Kit Pro">Preview</button>
+					<button class="add-btn" type="button">Add to cart</button>
+				</div>
+			</div>
+			<div class="product" data-id="p8" data-name="Intercooler" data-price="349" data-category="intercooler">
+				<img src="intercooler2.png" alt="Intercooler">
+				<h3>Intercooler</h3>
+				<p>$349</p>
+				<div class="product-actions">
+					<button class="preview-btn" type="button" aria-label="Preview Intercooler Pipes">Preview</button>
+					<button class="add-btn" type="button">Add to cart</button>
+				</div>
+			</div>
+			<div class="product" data-id="p9" data-name="Performance Filter" data-price="179" data-category="intake">
+				<img src="intake2.png" alt="Performance Intake">
+				<h3>Performance Filter</h3>
+				<p>$179</p>
+				<div class="product-actions">
+					<button class="preview-btn" type="button" aria-label="Preview Performance Filter">Preview</button>
+					<button class="add-btn" type="button">Add to cart</button>
+				</div>
+			</div>
+			<div class="product" data-id="p10" data-name="Exhaust Manifold" data-price="649" data-category="exhaust">
+				<img src="exhaust2.png" alt="Exhaust Manifold">
+				<h3>Exhaust Manifold</h3>
+				<p>$649</p>
+				<div class="product-actions">
+					<button class="preview-btn" type="button" aria-label="Preview Exhaust Manifold">Preview</button>
+					<button class="add-btn" type="button">Add to cart</button>
+				</div>
+			</div>
+			<div class="product" data-id="p11" data-name="KESS Bench Edition" data-price="3299" data-category="kess">
+				<img src="kessv3.png" alt="KESS Bench Edition">
+				<h3>KESS Bench Edition</h3>
+				<p>$3299</p>
+				<div class="product-actions">
+					<button class="preview-btn" type="button" aria-label="Preview KESS Bench Edition">Preview</button>
+					<button class="add-btn" type="button">Add to cart</button>
+				</div>
+			</div>
+			<div class="product" data-id="p12" data-name="Air Suspension Coils" data-price="1199" data-category="coilovers">
+				<img src="coilovers2.png" alt="Air Suspension Coils">
+				<h3>Air Suspension Coils</h3>
+				<p>$1199</p>
+				<div class="product-actions">
+					<button class="preview-btn" type="button" aria-label="Preview Air Suspension Coils">Preview</button>
+					<button class="add-btn" type="button">Add to cart</button>
+				</div>
+			</div>
 		</div>
 	</main>
 
@@ -115,7 +201,7 @@
 		</div>
 	</footer>
 
-	<!-- unified site script (shop.html) — unchanged -->
+	<!-- unified site script (shop.html) -->
 	<script>
 		(function(){
 			const PAGE_SITE_TOKEN = 'site-v2';
@@ -157,10 +243,24 @@
 					nav.classList.toggle('open', !isOpen);
 				});
 				nav.addEventListener('click', (e) => e.stopPropagation());
+				
+				// Dropdown toggle for Shop button on mobile
+				const shopLink = document.querySelector('.nav-shop-link');
+				const dropdown = document.querySelector('.nav-dropdown');
+				if (shopLink && dropdown) {
+					shopLink.addEventListener('click', (e) => {
+						if (window.innerWidth <= 600) {
+							e.preventDefault();
+							dropdown.classList.toggle('open');
+						}
+					});
+				}
+				
 				window.addEventListener('resize', () => {
 					if (window.innerWidth > 600) {
 						toggle.setAttribute('aria-expanded','false');
 						nav.classList.remove('open');
+						if (dropdown) dropdown.classList.remove('open');
 					}
 				});
 				document.addEventListener('click', (e) => {
@@ -173,8 +273,107 @@
 				});
 			})();
 
+			/* Sort and Filter functionality */
+			(function bindSortAndFilter(){
+				const sortBtn = document.querySelector('.sort-btn');
+				const sortMenu = document.querySelector('.sort-menu');
+				const searchInput = document.getElementById('search-input');
+				const productGrid = document.getElementById('product-grid');
+				const products = Array.from(productGrid.querySelectorAll('.product'));
+				let currentSort = 'default';
+				let currentCategory = '';
+
+				// Get category from URL on load
+				const urlParams = new URLSearchParams(window.location.search);
+				currentCategory = urlParams.get('category') || '';
+
+				// Toggle sort menu
+				if (sortBtn) {
+					sortBtn.addEventListener('click', (e) => {
+						e.stopPropagation();
+						const isOpen = sortBtn.getAttribute('aria-expanded') === 'true';
+						sortBtn.setAttribute('aria-expanded', String(!isOpen));
+						sortMenu.classList.toggle('open', !isOpen);
+					});
+				}
+
+				// Sort menu items click
+				if (sortMenu) {
+					sortMenu.querySelectorAll('[data-sort]').forEach(btn => {
+						btn.addEventListener('click', (e) => {
+							e.stopPropagation();
+							currentSort = btn.dataset.sort;
+							sortBtn.setAttribute('aria-expanded', 'false');
+							sortMenu.classList.remove('open');
+							applyFilters();
+						});
+					});
+				}
+
+				// Search input
+				if (searchInput) {
+					searchInput.addEventListener('input', () => {
+						applyFilters();
+					});
+				}
+
+				function applyFilters() {
+					const searchTerm = searchInput.value.toLowerCase();
+					let filtered = products.filter(product => {
+						const name = product.dataset.name?.toLowerCase() || '';
+						const title = product.querySelector('h3')?.textContent.toLowerCase() || '';
+						const category = product.dataset.category || '';
+						const matchesSearch = name.includes(searchTerm) || title.includes(searchTerm);
+						const matchesCategory = !currentCategory || category === currentCategory;
+						return matchesSearch && matchesCategory;
+					});
+
+					// Apply sorting
+					filtered.sort((a, b) => {
+						const aName = (a.dataset.name || '').toLowerCase();
+						const bName = (b.dataset.name || '').toLowerCase();
+						const aPrice = parseFloat(a.dataset.price || 0);
+						const bPrice = parseFloat(b.dataset.price || 0);
+
+						switch(currentSort) {
+							case 'price-low':
+								return aPrice - bPrice;
+							case 'price-high':
+								return bPrice - aPrice;
+							case 'name-asc':
+								return aName.localeCompare(bName);
+							case 'name-desc':
+								return bName.localeCompare(aName);
+							case 'default':
+							default:
+								return products.indexOf(a) - products.indexOf(b);
+						}
+					});
+
+					// Reorder and toggle visibility
+					products.forEach(product => {
+						product.style.display = 'none';
+					});
+					
+					filtered.forEach(product => {
+						product.style.display = '';
+						productGrid.appendChild(product);
+					});
+				}
+
+				// Close menu on outside click
+				document.addEventListener('click', (e) => {
+					if (sortBtn && !sortBtn.contains(e.target) && !sortMenu.contains(e.target)) {
+						sortBtn.setAttribute('aria-expanded', 'false');
+						sortMenu.classList.remove('open');
+					}
+				});
+
+				// Initial filter on page load
+				applyFilters();
+			})();
+
 			/* Shop: Add to cart (if product grid exists) */
-			const productGrid = document.getElementById('product-grid');
 			if (productGrid) {
 				function addToCart(item) {
 					const cart = getCart();

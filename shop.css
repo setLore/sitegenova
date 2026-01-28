@@ -156,31 +156,13 @@ body {
 .search-btn:active { transform: scale(0.95); }
 
 @media (max-width: 600px) {
-	body { padding-top: calc(var(--header-height) + 20px); padding-bottom: clamp(100px, 15vh, 150px); }
-	
-	.page-main { padding: 12px 12px 12px 12px; margin: 12px auto; }
-	.page-header { flex-direction: column; align-items: stretch; margin-bottom: 18px; }
-	.page-header h1 { margin: 0 0 12px 0; font-size: clamp(24px, 4vw, 32px); }
-	.header-controls { flex-direction: column; gap: 10px; }
+	.page-header { flex-direction: column; align-items: stretch; }
+	.header-controls { flex-direction: column; }
 	.search-bar { width: 100%; }
 	.search-bar input { min-width: auto; }
-	.sort-menu { position: fixed; left: 16px; right: 16px; width: auto; top: auto; }
-	.products { grid-template-columns: repeat(2, 1fr); gap: 12px; padding-bottom: 12px; }
-	.product { padding: 10px; }
-	.product h3 { font-size: 14px; margin: 8px 0 4px 0; }
-	.product p { font-size: 13px; margin: 0 0 10px 0; }
-	.product-actions { gap: 6px; }
-	.preview-btn { padding: 6px 10px; font-size: 12px; }
-	.add-btn { padding: 6px 10px; font-size: 12px; }
+	.sort-menu { position: fixed; left: 16px; right: 16px; width: auto; }
 }
 
-@media (max-width: 480px) {
-	body { padding-bottom: clamp(120px, 18vh, 180px); }
-	
-	.products { grid-template-columns: 1fr; }
-	.page-main { padding: 10px; margin: 10px auto; }
-	.product { padding: 8px; }
-}
 .products { display:grid; grid-template-columns: repeat(3,1fr); gap:16px; }
 .product { background:var(--surface); padding:12px; border-radius:10px; text-align:center; position:relative; transition: transform .18s ease, box-shadow .18s ease; will-change: transform; cursor: pointer; }
 .product img{
@@ -288,116 +270,4 @@ body {
 
 @media (prefers-reduced-motion: reduce){
 	.preview-modal, .pm-window, .pm-image { transition: none !important; }
-}
-
-.nav-item-with-dropdown {
-	position: relative;
-	display: inline-flex;
-	align-items: center;
-}
-
-.nav-dropdown {
-	position: absolute;
-	top: 100%;
-	left: 0;
-	background: var(--surface-darker);
-	border: 1px solid var(--border);
-	border-radius: 8px;
-	min-width: 150px;
-	margin-top: 8px;
-	padding: 8px 0;
-	opacity: 0;
-	visibility: hidden;
-	transform: translateY(-8px);
-	transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
-	z-index: 200;
-	box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-.nav-item-with-dropdown:hover .nav-dropdown {
-	opacity: 1;
-	visibility: visible;
-	transform: translateY(0);
-}
-
-.nav-dropdown-item {
-	display: block;
-	padding: 10px 16px;
-	color: var(--text);
-	text-decoration: none;
-	transition: background 0.2s;
-	white-space: nowrap;
-}
-
-.nav-dropdown-item:hover,
-.nav-dropdown-item:focus {
-	background: var(--accent);
-}
-
-.nav-shop-link {
-	display: inline-flex;
-	align-items: center;
-	gap: 4px;
-}
-
-.nav-shop-link i {
-	font-size: 0.75em;
-	transition: transform 0.2s;
-}
-
-.nav-item-with-dropdown:hover .nav-shop-link i {
-	transform: rotate(180deg);
-}
-
-@media (max-width: 600px) {
-	body { padding-top: calc(var(--header-height) + 20px); padding-bottom: clamp(100px, 15vh, 150px); }
-	
-	.nav-item-with-dropdown { width: 100%; }
-	
-	.nav-shop-link {
-		width: 100%;
-		padding: clamp(10px, 2.6vw, 14px);
-		font-size: clamp(14px, 3vw, 16px);
-		background: var(--surface-darker);
-		color: var(--text);
-		border-radius: 8px;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		cursor: pointer;
-		transition: background 0.2s;
-	}
-	
-	.nav-shop-link:hover { background: var(--accent); }
-	
-	.nav-dropdown {
-		position: static;
-		background: transparent;
-		border: none;
-		padding: 8px 0 0 0;
-		margin: 0;
-		opacity: 0;
-		max-height: 0;
-		visibility: hidden;
-		transform: none;
-		transition: opacity 0.2s, max-height 0.2s, visibility 0.2s;
-		box-shadow: none;
-		overflow: hidden;
-	}
-	
-	.nav-dropdown.open {
-		opacity: 1;
-		max-height: 400px;
-		visibility: visible;
-	}
-	
-	.nav-dropdown-item {
-		padding: 12px 16px 12px 24px;
-		background: rgba(255,255,255,0.04);
-		margin: 6px 0;
-		border-radius: 6px;
-		font-size: clamp(13px, 2.5vw, 15px);
-	}
-	
-	.nav-dropdown-item:first-child { margin-top: 8px; }
 }

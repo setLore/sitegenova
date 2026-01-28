@@ -16,20 +16,29 @@
 		<nav id="site-nav" class="nav-buttons" role="navigation">
 			<a class="nav-link" href="index.html">Home</a>
 			<a class="nav-link" href="shop.html">Shop</a>
+			<div class="nav-item-with-dropdown" style="display:none;">
+				<div class="nav-dropdown" role="menu" aria-label="Shop categories">
+					<a class="nav-dropdown-item" href="shop.html?category=turbo" role="menuitem">Turbo</a>
+					<a class="nav-dropdown-item" href="shop.html?category=intercooler" role="menuitem">Intercooler</a>
+					<a class="nav-dropdown-item" href="shop.html?category=intake" role="menuitem">Cold Air Intake</a>
+					<a class="nav-dropdown-item" href="shop.html?category=exhaust" role="menuitem">Exhaust System</a>
+					<a class="nav-dropdown-item" href="shop.html?category=kess" role="menuitem">KESS</a>
+					<a class="nav-dropdown-item" href="shop.html?category=coilovers" role="menuitem">Coilovers</a>
+				</div>
+			</div>
 			<a class="nav-link" href="about.html">About</a>
 		</nav>
 
 		<div class="header-actions">
+			<a class="cart-button" href="cart.html" aria-label="Open cart">
+				<i class="bi bi-cart cart-icon" aria-hidden="true"></i>
+				<span class="cart-count" aria-hidden="true">0</span>
+			</a>
 			<button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">
 				<span class="bar"></span>
 				<span class="bar"></span>
 				<span class="bar"></span>
 			</button>
-
-			<a class="cart-button" href="cart.html" aria-label="Open cart">
-				<i class="bi bi-cart cart-icon" aria-hidden="true"></i>
-				<span class="cart-count" aria-hidden="true">0</span>
-			</a>
 		</div>
 	</header>
 
@@ -112,10 +121,24 @@
 					nav.classList.toggle('open', !isOpen);
 				});
 				nav.addEventListener('click', (e) => e.stopPropagation());
+				
+				// Dropdown toggle for Shop button on mobile
+				const shopLink = document.querySelector('.nav-shop-link');
+				const dropdown = document.querySelector('.nav-dropdown');
+				if (shopLink && dropdown) {
+					shopLink.addEventListener('click', (e) => {
+						if (window.innerWidth <= 600) {
+							e.preventDefault();
+							dropdown.classList.toggle('open');
+						}
+					});
+				}
+				
 				window.addEventListener('resize', () => {
 					if (window.innerWidth > 600) {
 						toggle.setAttribute('aria-expanded','false');
 						nav.classList.remove('open');
+						if (dropdown) dropdown.classList.remove('open');
 					}
 				});
 				document.addEventListener('click', (e) => {

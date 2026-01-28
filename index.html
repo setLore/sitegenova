@@ -6,7 +6,6 @@
 	<title>M&D</title>
 	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-	
 </head>
 <body>
 	<header class="site-header">
@@ -15,31 +14,33 @@
 		</a>
 		<nav id="site-nav" class="nav-buttons" role="navigation">
 			<a class="nav-link" href="index.html">Home</a>
+			
 			<div class="nav-item-with-dropdown">
-				<a class="nav-link nav-shop-link" href="shop.html">Shop <i class="bi bi-chevron-down" aria-hidden="true"></i></a>
-				<div class="nav-dropdown" role="menu" aria-label="Shop categories">
-					<a class="nav-dropdown-item" href="shop.html?category=turbo" role="menuitem">Turbo</a>
-					<a class="nav-dropdown-item" href="shop.html?category=intercooler" role="menuitem">Intercooler</a>
-					<a class="nav-dropdown-item" href="shop.html?category=intake" role="menuitem">Cold Air Intake</a>
-					<a class="nav-dropdown-item" href="shop.html?category=exhaust" role="menuitem">Exhaust System</a>
-					<a class="nav-dropdown-item" href="shop.html?category=kess" role="menuitem">KESS</a>
-					<a class="nav-dropdown-item" href="shop.html?category=coilovers" role="menuitem">Coilovers</a>
-				</div>
+				<a class="nav-link" href="shop.html">Shop</a>
+				<ul class="nav-dropdown" role="menu">
+					<li role="none"><a class="nav-dropdown-item" href="shop.html?category=turbo" role="menuitem">Turbo</a></li>
+					<li role="none"><a class="nav-dropdown-item" href="shop.html?category=intercooler" role="menuitem">Intercooler</a></li>
+					<li role="none"><a class="nav-dropdown-item" href="shop.html?category=intake" role="menuitem">Cold Air Intake</a></li>
+					<li role="none"><a class="nav-dropdown-item" href="shop.html?category=exhaust" role="menuitem">Exhaust System</a></li>
+					<li role="none"><a class="nav-dropdown-item" href="shop.html?category=kess" role="menuitem">KESS</a></li>
+					<li role="none"><a class="nav-dropdown-item" href="shop.html?category=coilovers" role="menuitem">Coilovers</a></li>
+				</ul>
 			</div>
+			
 			<a class="nav-link" href="about.html">About</a>
 		</nav>
 
 		<div class="header-actions">
+			<a class="cart-button" href="cart.html" aria-label="Open cart">
+				<i class="bi bi-cart cart-icon" aria-hidden="true"></i>
+				<span class="cart-count" aria-hidden="true">0</span>
+			</a>
+
 			<button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">
 				<span class="bar"></span>
 				<span class="bar"></span>
 				<span class="bar"></span>
 			</button>
-
-			<a class="cart-button" href="cart.html" aria-label="Open cart">
-				<i class="bi bi-cart cart-icon" aria-hidden="true"></i>
-				<span class="cart-count" aria-hidden="true">0</span>
-			</a>
 		</div>
 	</header>
 
@@ -56,23 +57,6 @@
 			</div>
 		</section>
 	</div>
-
-	<footer class="site-footer">
-		<div class="site-footer-inner">
-			<span class="footer-left">© M&amp;D 2025</span>
-			<div class="social-buttons" role="group" aria-label="Social links">
-				<a class="social-button social-instagram" href="https://www.instagram.com/825a14" target="_blank" rel="noopener noreferrer" aria-label="Open Instagram">
-					<i class="bi bi-instagram" aria-hidden="true"></i>
-				</a>
-				<a class="social-button social-tiktok" href="https://www.tiktok.com/@00_dimov" target="_blank" rel="noopener noreferrer" aria-label="Open TikTok">
-					<i class="bi bi-tiktok" aria-hidden="true"></i>
-				</a>
-				<a class="social-button social-facebook" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Open Facebook">
-					<i class="bi bi-facebook" aria-hidden="true"></i>
-				</a>
-			</div>
-		</div>
-	</footer>
 
 	<!-- Review Section BELOW hero, with bg image and left-aligned carousel -->
 	<section class="review-section">
@@ -97,6 +81,23 @@
 			</div>
 		</div>
 	</section>
+
+	<footer class="site-footer">
+		<div class="site-footer-inner">
+			<span class="footer-left">© M&amp;D 2025</span>
+			<div class="social-buttons" role="group" aria-label="Social links">
+				<a class="social-button social-instagram" href="https://www.instagram.com/825a14" target="_blank" rel="noopener noreferrer" aria-label="Open Instagram">
+					<i class="bi bi-instagram" aria-hidden="true"></i>
+				</a>
+				<a class="social-button social-tiktok" href="https://www.tiktok.com/@00_dimov" target="_blank" rel="noopener noreferrer" aria-label="Open TikTok">
+					<i class="bi bi-tiktok" aria-hidden="true"></i>
+				</a>
+				<a class="social-button social-facebook" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Open Facebook">
+					<i class="bi bi-facebook" aria-hidden="true"></i>
+				</a>
+			</div>
+		</div>
+	</footer>
 
 	<!-- replace/add script: menu toggle + cart badge helpers -->
 	<script>
@@ -243,6 +244,60 @@
 				renderReview(idx);
 			});
 			renderReview(idx);
+		})();
+
+		// Dropdown menu toggle
+		(function(){
+			const shopBtn = document.querySelector('.nav-shop-btn');
+			const dropdown = document.querySelector('.nav-dropdown');
+			if (!shopBtn || !dropdown) return;
+
+			shopBtn.addEventListener('click', (e) => {
+				const isOpen = shopBtn.getAttribute('aria-expanded') === 'true';
+				shopBtn.setAttribute('aria-expanded', String(!isOpen));
+				dropdown.classList.toggle('open', !isOpen);
+			});
+
+			document.addEventListener('click', (e) => {
+				if (!e.target.closest('.nav-item-with-dropdown')) {
+					shopBtn.setAttribute('aria-expanded', 'false');
+					dropdown.classList.remove('open');
+				}
+			});
+
+			dropdown.addEventListener('click', (e) => {
+				if (e.target.matches('.nav-dropdown-item')) {
+					shopBtn.setAttribute('aria-expanded', 'false');
+					dropdown.classList.remove('open');
+				}
+			});
+		})();
+
+		(function(){
+			const shopLink = document.querySelector('.nav-item-with-dropdown > .nav-link');
+			const dropdown = document.querySelector('.nav-dropdown');
+			const navItem = document.querySelector('.nav-item-with-dropdown');
+			
+			if (!shopLink || !dropdown || !navItem) return;
+
+			shopLink.addEventListener('click', (e) => {
+				if (window.innerWidth <= 600) {
+					e.preventDefault();
+					navItem.classList.toggle('dropdown-open');
+				}
+			});
+
+			dropdown.addEventListener('click', (e) => {
+				if (e.target.matches('.nav-dropdown-item') && window.innerWidth <= 600) {
+					navItem.classList.remove('dropdown-open');
+				}
+			});
+
+			document.addEventListener('click', (e) => {
+				if (window.innerWidth <= 600 && !e.target.closest('.nav-item-with-dropdown')) {
+					navItem.classList.remove('dropdown-open');
+				}
+			});
 		})();
 	</script>
 </body>
